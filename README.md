@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334951.svg)](https://doi.org/10.5281/zenodo.13334951)
+
 ## BI-ADD (Bottom-up Iterative Anomalous Diffusion Detector)
 
 > [!IMPORTANT]  
