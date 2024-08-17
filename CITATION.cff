@@ -5,7 +5,7 @@ authors:
     given-names: Junwoo
     orcid: https://orcid.org/0009-0000-6126-2125
 title: "BI-ADD"
-version: v1.0.5
+version: v0.1.2-alpha
 identifiers:
   - type: doi
     value: 10.5281/zenodo.13334951
