@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
+import os
 
-
-def load_datas(datapath, prefix, exp):
+def load_andi_datas(datapath, prefix, exp):
     fovs = np.arange(30)
     dfs = []
     vips = []
@@ -17,3 +17,14 @@ def load_datas(datapath, prefix, exp):
             vips.append(vip_indices)
         dfs.append(df)
     return dfs, fovs, vips
+
+
+def load_datas(datapath):
+    dfs = []
+    file_list = []
+    for file in os.listdir(datapath):
+        if file.endswith(".csv"):
+            df = pd.read_csv(datapath + file)
+            dfs.append(df)
+            file_list.append(file.split('.csv')[0])
+    return dfs, file_list

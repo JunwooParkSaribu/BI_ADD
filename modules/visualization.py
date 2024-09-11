@@ -14,9 +14,9 @@ def raw_distribution(fname, all_alphas, all_ks, all_seg_lengths):
     plt.close('all')
 
 
-def sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states, track, exp):
-    sample_distrib_file = f'{image_path}/track{track}_exp{exp}_samples_and_cluster.png'
-    plt.figure(f'track{track}_exp{exp} cluster_center and sample distribution')
+def sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states):
+    sample_distrib_file = f'{image_path}/data_samples_and_cluster.png'
+    plt.figure(f'data cluster_center and sample distribution')
     plt.scatter(stack_samples[:, 0], stack_samples[:, 1],
                 c=np.minimum(np.ones_like(all_seg_lengths), all_seg_lengths / np.quantile(all_seg_lengths, 0.75)),
                 s=0.3, alpha=0.7)
@@ -35,8 +35,8 @@ def sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, clu
     plt.close('all')
 
 
-def cluster_boundary(image_path, all_alphas, all_ks, cluster, track, exp):
-    boundary_file = f'{image_path}/track{track}_exp{exp}_mixture_boundary.png'
+def cluster_boundary(image_path, all_alphas, all_ks, cluster):
+    boundary_file = f'{image_path}/data_mixture_boundary.png'
     alpha_range = np.linspace(-2.2, 4.2, 100)
     k_range = np.linspace(-4.0, 4.0, 150)
     H, xedges, yedges = np.histogram2d(all_ks, all_alphas, bins=[k_range, alpha_range])

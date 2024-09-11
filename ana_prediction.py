@@ -7,7 +7,7 @@ from sklearn.mixture import GaussianMixture, BayesianGaussianMixture
 from sklearn.model_selection import GridSearchCV
 from modules import load_priors
 from modules.load_files.load_andi_files import load_datas
-#from modules.visualization import cluster_boundary, sample_distribution, cps_visualization
+from modules.visualization import cluster_boundary, sample_distribution, cps_visualization
 from modules.load_models import RegModel
 
 
@@ -18,7 +18,7 @@ MAX_DENSITY_NB = 25
 EXT_WIDTH = 100
 CLUSTER_RANGE = np.arange(2, 7)
 CLUSTER_SEG_LENGTH_SEUIL = 16
-ADJUST_MIN_SEG_LENGTH = 24
+ADJUST_MIN_SEG_LENGTH = 5
 
 
 def gmm_bic_score(estimator, x):
@@ -486,16 +486,12 @@ def cluster_define(samples, state_number):
     return cluster, cluster_states
 
 
-def main(public_data_path, path_results, image_path, track, exp, make_image):
-    if exp == 11:
-        WIN_WIDTHS = np.arange(6, 10, 2)
-        SHIFT_WIDTH = 2
-    else:
-        WIN_WIDTHS = np.arange(20, 40, 2)
-        SHIFT_WIDTH = 5
+def main(public_data_path, path_results, image_path, make_image):
+    WIN_WIDTHS = np.arange(20, 40, 2)
+    SHIFT_WIDTH = 5
 
-    states_nb = load_priors.load_state_prior(path_results, track, exp)
-    all_alphas, all_ks, all_seg_lengths = load_priors.load_priors(path_results, track, exp)
+    states_nb = load_priors.load_state_prior(path_results)
+    all_alphas, all_ks, all_seg_lengths = load_priors.load_priors(path_results)
     all_alphas = all_alphas[np.argwhere(all_seg_lengths > CLUSTER_SEG_LENGTH_SEUIL).flatten()]
     all_ks = all_ks[np.argwhere(all_seg_lengths > CLUSTER_SEG_LENGTH_SEUIL).flatten()]
     all_seg_lengths = all_seg_lengths[np.argwhere(all_seg_lengths > CLUSTER_SEG_LENGTH_SEUIL).flatten()]
@@ -511,42 +507,41 @@ def main(public_data_path, path_results, image_path, track, exp, make_image):
 
     cluster, cluster_states = cluster_define(stack_samples, states_nb)
     if make_image:
-        #sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states, track, exp)
-        #cluster_boundary(image_path, all_alphas, all_ks, cluster, track, exp)
+        sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states)
+        cluster_boundary(image_path, all_alphas, all_ks, cluster)
         print(f'Cluster images are generated...')
 
-    path_exp = path_results + f'track_{track}/exp_{exp}/'
-    dfs, fovs, vips = load_datas(public_data_path, track, exp)
+    dfs, file_names = load_datas(public_data_path)
 
     reg_model = RegModel(REG_MODEL_NUMS)
-    for df, fov, vip_indices in zip(dfs, fovs, vips):
+    for df, f_name in zip(dfs, file_names):
         outputs = ''
-        submission_file = path_exp + f'fov_{fov}.txt'
+        submission_file = path_results + f'{f_name}.txt'
         if not os.path.exists(submission_file):
-            if track == 2:
-                traj_idx = np.sort(df.traj_idx.unique())
-            else:
-                traj_idx = np.sort(vip_indices)
-                if len(traj_idx) != 10:
-                    sys.exit(f'Number of indices is not 10 for the track{track} exp{exp} fov{fov}')
+            traj_idx = np.sort(df.traj_idx.unique())
 
             for idx in traj_idx:
                 x = np.array(df[df.traj_idx == idx])[:, 2]
                 y = np.array(df[df.traj_idx == idx])[:, 3]
+                if len(x) > 5:
+                    cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
+                                                                                EXT_WIDTH,
+                                                                                search_seuil=SEARCH_SEUIL,
+                                                                                cluster=cluster,
+                                                                                cluster_states=cluster_states,
+                                                                                reg_model=reg_model)
 
-                cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
-                                                                             EXT_WIDTH,
-                                                                             search_seuil=SEARCH_SEUIL,
-                                                                             cluster=cluster,
-                                                                             cluster_states=cluster_states,
-                                                                             reg_model=reg_model)
+                    prediction_traj = [idx.astype(int)]
+                    for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
+                        prediction_traj.append(f'{np.round(10 ** k, 8):.8f}')
+                        prediction_traj.append(alpha)
+                        prediction_traj.append(state)
+                        prediction_traj.append(cp)
+                else:
+                    prediction_traj = [idx.astype(int), np.nan, np.nan, np.nan, len(x)]
 
-                prediction_traj = [idx.astype(int)]
-                for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
-                    prediction_traj.append(f'{np.round(10 ** k, 8):.8f}')
-                    prediction_traj.append(alpha)
-                    prediction_traj.append(state)
-                    prediction_traj.append(cp)
+                #if idx == 4336:
+                #    cps_visualization(image_path, x, y, cps, alpha=0.8, ext=50)
 
                 outputs += ','.join(map(str, prediction_traj))
                 outputs += '\n'
@@ -556,11 +551,9 @@ def main(public_data_path, path_results, image_path, track, exp, make_image):
                 f.close()
 
         else:
-            print(f'Result already exists: TRACK:{track} EXP:{exp} FOV:{fov}')
+            print(f'Result already exists: data:{f_name}')
 
 
 if __name__ == "__main__":
-    print(f'--------- processing on track:{sys.argv[4]}, exp:{sys.argv[5]} ---------')
-    # data_path, result_path, image_path, track, exp, True
-    main(sys.argv[1], sys.argv[2], sys.argv[3],
-         int(sys.argv[4]), int(sys.argv[5]), bool(sys.argv[6]))
+    # data_path, result_path, image_path, True
+    main(sys.argv[1], sys.argv[2], sys.argv[3], bool(sys.argv[4]))

@@ -8,12 +8,9 @@ import pandas
 from modules import load_priors
 
 
-N_EXPS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-TRACKS = [1, 2]
-submit_number = 0
 PYTHON_VERSION = 'python3'
-PUBLIC_DATA_PATH = f'public_data_challenge_v0/'
-RESULT_DIR_PATH = f'result_final_{submit_number}/'
+PUBLIC_DATA_PATH = f'inputs/'
+RESULT_DIR_PATH = f'outputs/'
 
 
 def run_command(cmd):
@@ -22,6 +19,7 @@ def run_command(cmd):
 
 
 def main(data_path, result_path):
+    data_list = []
     try:
         if not os.path.exists(f'./models'):
             raise Exception('Models are not found, please download pretrained models')
@@ -53,45 +51,34 @@ def main(data_path, result_path):
         os.makedirs(result_path)
     if not os.path.exists(image_path):
         os.makedirs(image_path)
+    for file in os.listdir(data_path):
+        if file.endswith(".csv"):
+            data_list.append(file)
 
-    for track in TRACKS:
-        path_track = result_path + f'track_{track}/'
-        if not os.path.exists(path_track):
-            os.makedirs(path_track)
-        for exp in N_EXPS:
-            path_exp = path_track + f'exp_{exp}/'
-            if not os.path.exists(path_exp):
-                os.makedirs(path_exp)
-
-    load_priors.build_state_priror(result_path, TRACKS, N_EXPS)
+    load_priors.build_state_priror(result_path, data_list)
     print('State numbers are loaded')
 
-    for track in TRACKS:
-        for exp in N_EXPS:
-            print(f'Prior building on the track:{track} exp:{exp}')
-            proc = run_command([PYTHON_VERSION, f'./modules/build_priors.py',
-                                f'{data_path}', f'{result_path}', f'{image_path}',
-                                f'{track}', f'{exp}', f'{False}'])
+    print(f'Prior building on the data...')
+    proc = run_command([PYTHON_VERSION, f'./modules/build_priors.py',
+                        f'{data_path}', f'{result_path}', f'{image_path}',
+                        f'{False}'])
+    proc.wait()
+    if proc.poll() == 0:
+        print(f'-> successfully finished')
+    else:
+        print(f'-> failed with status:{proc.poll()}')
 
-            proc.wait()
-            if proc.poll() == 0:
-                print(f'-> successfully finished')
-            else:
-                print(f'-> failed with status:{proc.poll()}')
 
-    for track in TRACKS:
-        for exp in N_EXPS:
-            print(f'Prediction on the track:{track} exp:{exp}')
-            proc = run_command([PYTHON_VERSION, f'ana_prediction.py',
-                                f'{data_path}', f'{result_path}', f'{image_path}',
-                                f'{track}', f'{exp}', f'{False}'])
-            proc.wait()
-            if proc.poll() == 0:
-                print(f'-> successfully finished')
-            else:
-                print(f'-> failed with status:{proc.poll()}')
+    print(f'Prediction on the data...')
+    proc = run_command([PYTHON_VERSION, f'ana_prediction.py',
+                        f'{data_path}', f'{result_path}', f'{image_path}',
+                        f'{False}'])
+    proc.wait()
+    if proc.poll() == 0:
+        print(f'-> successfully finished')
+    else:
+        print(f'-> failed with status:{proc.poll()}')
 
 
 if __name__ == "__main__":
-    print(f'Submit number: {submit_number}')
     main(PUBLIC_DATA_PATH, RESULT_DIR_PATH)
