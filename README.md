@@ -73,7 +73,7 @@ At first, <b>BI-ADD</b> builds prior distribution of alpha, K by splitting a tra
 
 <h3> Contacts </h3>
 junwoo.park@sorbonne-universite.fr</br>
-[SU FIONA preset for AnDi2 challenge](https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA)</br>
+Team SU-FIONA preset for AnDi2 challenge datasets: (https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA)</br>
 
 <h3> References </h3>
 
