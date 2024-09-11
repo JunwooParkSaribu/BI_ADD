@@ -63,16 +63,17 @@ At first, <b>BI-ADD</b> builds prior distribution of alpha, K by splitting a tra
 
 </br>
 
-<h3> To remake results on AnDi2 final-phase datasets </h3>
+<h3> To run the program on your device </h3>
 
 1. Clone the repository on your local device.</br>
-2. Download pre-trained [*models*](https://drive.google.com/file/d/1WF0eW8Co23-mKQiHNH-KHHK_lJiIW-WC/view?usp=sharing), place the *models* folder inside of *AnDi2_SU_FIONA* folder.</br>
-3. Run *run_process.py* script with python.</br>
-4. Results will be made in the *result_final_0* folder.
-* result_filnal_submission.zip contains the result of the AnDi2 final-phase.
+2. Download pre-trained [*models*](https://drive.google.com/file/d/1WF0eW8Co23-mKQiHNH-KHHK_lJiIW-WC/view?usp=sharing), place the *models* folder inside of *BI_ADD* folder.</br>
+3. Place trajectory files inside *inputs* folder.</br>
+4. Run *run_process.py* script with python.</br>
+5. Results will be made in the *outputs* folder.
 
 <h3> Contacts </h3>
 junwoo.park@sorbonne-universite.fr<br>
+[SU-FIONA preset for AnDi2 challenge](https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA)
 
 <h3> References </h3>
 
