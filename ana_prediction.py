@@ -240,10 +240,13 @@ def exhaustive_cps_search(x, y, win_widths, shift_width, ext_width, search_seuil
         if cluster is None:
             return np.array([0, len(x)]), np.array([1.0]), reg_model.k_predict([[x, y]]), np.array([2]), np.array([len(x)])
         else:
+            """
             k_preds, alpha_preds, states = post_processing(np.array([0, len(x)]), [np.mean(cluster.means_[:, 1])], [np.mean(cluster.means_[:, 0])], np.array([2]),
                                                            cluster, cluster_states,
                                                            ad_length=ADJUST_MIN_SEG_LENGTH, force_imm=True)
             return np.array([0, len(x)]), alpha_preds, k_preds, states, np.array([len(x)])
+            """
+            return np.array([0, len(x)]), np.array([np.nan]), reg_model.k_predict([[x, y]]), np.array([np.nan]), np.array([len(x)])
 
     if cluster is not None and len(cluster.means_) == 1:
         start_cps = []
@@ -523,22 +526,20 @@ def main(public_data_path, path_results, image_path, make_image):
             for idx in traj_idx:
                 x = np.array(df[df.traj_idx == idx])[:, 2]
                 y = np.array(df[df.traj_idx == idx])[:, 3]
-                if len(x) > 5:
-                    cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
-                                                                                EXT_WIDTH,
-                                                                                search_seuil=SEARCH_SEUIL,
-                                                                                cluster=cluster,
-                                                                                cluster_states=cluster_states,
-                                                                                reg_model=reg_model)
 
-                    prediction_traj = [idx.astype(int)]
-                    for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
-                        prediction_traj.append(f'{np.round(10 ** k, 8):.8f}')
-                        prediction_traj.append(alpha)
-                        prediction_traj.append(state)
-                        prediction_traj.append(cp)
-                else:
-                    prediction_traj = [idx.astype(int), np.nan, np.nan, np.nan, len(x)]
+                cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
+                                                                            EXT_WIDTH,
+                                                                            search_seuil=SEARCH_SEUIL,
+                                                                            cluster=cluster,
+                                                                            cluster_states=cluster_states,
+                                                                            reg_model=reg_model)
+
+                prediction_traj = [idx.astype(int)]
+                for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
+                    prediction_traj.append(f'{np.round(10 ** k, 8):.8f}')
+                    prediction_traj.append(alpha)
+                    prediction_traj.append(state)
+                    prediction_traj.append(cp)
 
                 #if idx == 4336:
                 #    cps_visualization(image_path, x, y, cps, alpha=0.8, ext=50)
