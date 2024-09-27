@@ -12,7 +12,8 @@
 
 
 <b>BI-ADD</b> detects changepoints at single molecular trajectory level which follows fBm with two properties, Anomalous exponent(alpha) and Generalized diffusion coefficient(K), on different scenarios.</br>
-For the details of data and scenarios of trjaectories, please check Andi2 Challenge[^1][^2].
+For the details of data and scenarios of trjaectories, please check Andi2 Challenge[^1][^2].</br>
+The trajectory prediction from video is performed with <b>[FreeTrace](https://github.com/JunwooParkSaribu/FreeTrace)</b></br>
 
 <h2>Visualized examples of changepoint detection from molecular trajectories</h2>
 <table border="0"> 
