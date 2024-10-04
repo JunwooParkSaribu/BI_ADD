@@ -52,12 +52,14 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 </table>
 <img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/foot.png" width="164" height="52"></br>
 
+
 <table border="0"> 
         <tr> 
             <td><img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/alpha_test0.gif" width="380" height="380"></td> 
             <td><img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/sample5.gif" width="380" height="380"></td>
         </tr>  
 </table>
+
 
 <h3> Brief description of the method </h3>
 
