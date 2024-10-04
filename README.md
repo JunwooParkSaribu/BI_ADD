@@ -53,7 +53,7 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 
 <table border="0"> 
         <tr> 
-            <td>Application on simulated trajectories</td> 
+            <td>Application on simulated trajectories[^7]</td> 
             <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/alpha_test0.gif" width="680" height="340"></td> 
         </tr>
         <tr> 
@@ -95,3 +95,4 @@ Team SU-FIONA preset for AnDi2 challenge datasets: (https://github.com/JunwooPar
 [^4]: Scikit-image, Image processing in Python. PeerJ 2:e453 (2014) [https://doi.org/10.7717/peerj.453](https://doi.org/10.7717/peerj.453)
 [^5]: Convolutional LSTM Network, A Machine Learning Approach for Precipitation Nowcasting, Xingjian Shi et al. 2015 [https://arxiv.org/abs/1506.04214](https://arxiv.org/abs/1506.04214)
 [^6]: TensorFlow, Large-scale machine learning on heterogeneous systems, 2015
+[^7]: Chenouard, N., Smal, I., de Chaumont, F. et al. [Objective comparison of particle tracking methods](https://doi.org/10.1038/nmeth.2808). Nat Methods 11, 281–289 (2014).
