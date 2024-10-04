@@ -50,20 +50,19 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
             <td><img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/msm_4.gif" width="128" height="128"></td> 
         </tr>  
 </table>
-<img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/foot.png" width="164" height="52"></br>
-
 
 <table border="0"> 
         <tr> 
             <td>Simulated</td> 
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/alpha_test0.gif" width="760" height="380"></td> 
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/alpha_test0.gif" width="720" height="360"></td> 
         </tr>
         <tr> 
             <td>Real</td> 
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/sample5.gif" width="240" height="380"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/sample5.gif" width="200" height="340"></td>
         </tr>  
 </table>
 
+<img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/foot.png" width="164" height="52"></br>
 
 <h3> Brief description of the method </h3>
 
