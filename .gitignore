@@ -31,15 +31,15 @@
 ######################
 *.keras
 
-# TIFF files #
-######################
-alpha_test*.tiff
-err_test*.tiff
-
 # Result Files #
 ######################
 *.html
+alpha_test*.tiff
+err_test*.tiff
+*_locvideo.tiff
 *_traces.tiff
+*_cps.tiff
+*_hconcat.tiff
 
 # OS generated files #
 ######################
