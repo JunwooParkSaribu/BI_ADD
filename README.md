@@ -56,7 +56,7 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
             <td>Simulated trajectories</td> 
         </tr>
         <tr> 
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/alpha_test0.gif" width="680" height="340"></td> 
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/alpha_test0.gif" width="760" height="380"></td> 
         </tr>
 </table>
 
