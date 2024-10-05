@@ -58,7 +58,12 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
         </tr>
         <tr> 
             <td>Application on real trajectories</td> 
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/sample5.gif" width="180" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/sample5.gif" width="140" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real1.gif" width="140" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real2.gif" width="140" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real3.gif" width="140" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real4.gif" width="140" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real5.gif" width="140" height="340"></td>
         </tr>  
 </table>
 
