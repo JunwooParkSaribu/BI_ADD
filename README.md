@@ -53,7 +53,7 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 
 <table border="0"> 
         <tr> 
-            <td>Application on simulated trajectories</td> 
+            <td>Application on simulated trajectories(before/after)</td> 
         </tr>
         <tr> 
             <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/alpha_test0.gif" width="680" height="340"></td> 
@@ -62,13 +62,15 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 
 <table border="0"> 
         <tr> 
-            <td>Application on real trajectories</td> 
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/sample5.gif" width="140" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real1.gif" width="140" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real2.gif" width="140" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real3.gif" width="140" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real4.gif" width="140" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real5.gif" width="140" height="340"></td>
+            <td>Application on real trajectories(before/after)</td>
+        </tr>
+        <tr> 
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/sample5.gif" width="120" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real1.gif" width="120" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real2.gif" width="120" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real3.gif" width="120" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real4.gif" width="120" height="340"></td>
+            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real5.gif" width="120" height="340"></td>
         </tr>  
 </table>
 
