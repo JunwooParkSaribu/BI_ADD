@@ -345,19 +345,12 @@ def exhaustive_cps_search(x, y, win_widths, shift_width, ext_width, search_seuil
     if cluster is not None:
         pred_set = np.array([alpha_preds, k_preds]).T
         for alpha, label in zip(alpha_preds, cluster.predict(pred_set)):
-            if 0 in cluster_states and cluster_states[label] == 0:
-                states.append(0)
-            elif 1 in cluster_states and cluster_states[label] == 1:
-                states.append(1)
-            elif alpha > 1.85:
-                states.append(3)
-            else:
-                states.append(2)
-
+            states.append(label)
+        """
         k_preds, alpha_preds, states = post_processing(filtered_cps, k_preds, alpha_preds, states,
                                                        cluster, cluster_states,
                                                        ad_length=ADJUST_MIN_SEG_LENGTH, force_imm=True)
-
+        """
     alpha_preds = np.minimum(np.ones_like(alpha_preds) * 1.999, np.maximum(np.ones_like(alpha_preds) * 0.001,
                                                                            np.array(alpha_preds)))
     return filtered_cps, alpha_preds, k_preds, states, seg_lengths

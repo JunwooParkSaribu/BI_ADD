@@ -15,7 +15,7 @@ def raw_distribution(fname, all_alphas, all_ks, all_seg_lengths):
 
 
 def sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states):
-    sample_distrib_file = f'{image_path}/data_samples_and_cluster.png'
+    sample_distrib_file = f'{image_path}/data_filtered_distribution.png'
     plt.figure(f'data cluster_center and sample distribution')
     plt.scatter(stack_samples[:, 0], stack_samples[:, 1],
                 c=np.minimum(np.ones_like(all_seg_lengths), all_seg_lengths / np.quantile(all_seg_lengths, 0.75)),
@@ -38,14 +38,22 @@ def sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, clu
 def cluster_boundary(image_path, all_alphas, all_ks, cluster):
     boundary_file = f'{image_path}/data_mixture_boundary.png'
     alpha_range = np.linspace(-2.2, 4.2, 100)
-    k_range = np.linspace(-4.0, 4.0, 150)
-    H, xedges, yedges = np.histogram2d(all_ks, all_alphas, bins=[k_range, alpha_range])
-    plt.figure(figsize=(20, 16))
-    plt.title("Mixture boundary")
-    Z = np.stack((np.meshgrid(alpha_range, k_range))).T.reshape(-1, 2)
+    logk_range = np.linspace(-4.0, 4.0, 150)
+    H, xedges, yedges = np.histogram2d(all_ks, all_alphas, bins=[logk_range, alpha_range])
+    plt.figure(figsize=(20, 16), dpi=256)
+    plt.title("Mixture boundary", fontsize=28)
+    xx, yy = np.meshgrid(alpha_range, logk_range)
+    Z = np.stack((xx, yy)).T.reshape(-1, 2)
     ZC = cluster.predict(Z)
-    plt.scatter(Z[:, 0], Z[:, 1], c=ZC, s=0.35, alpha=0.7, zorder=1)
-    plt.imshow(H, extent=(alpha_range[0], alpha_range[-1], k_range[0], k_range[-1]), origin='lower', alpha=0.9)
+    plt.scatter(Z[:, 0], Z[:, 1], c=ZC, s=10, alpha=0.5, zorder=1)
+    plt.imshow(H, extent=(alpha_range[0], alpha_range[-1], logk_range[0], logk_range[-1]), origin='lower', alpha=0.9)
+    for i, cluster_mean in enumerate(cluster.means_):
+        label = cluster.predict([[cluster_mean[0], cluster_mean[1]]])
+        plt.scatter(cluster_mean[0], cluster_mean[1], c='w', marker='${}$'.format(label), zorder=10, s=1000)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xlabel(f'alpha', fontsize=24)
+    plt.ylabel(f'logK', fontsize=24)
     plt.savefig(boundary_file)
     plt.close('all')
 

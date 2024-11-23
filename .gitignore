@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.pyx
 
 # Packages #
 ############
@@ -19,6 +20,7 @@
 *.rar
 *.tar
 *.zip
+scratch*
 
 # Logs and databases #
 ######################
@@ -26,13 +28,19 @@
 *.sql
 *.sqlite
 *.pyc
+cachedir
+build
+error_log.txt
 
 # ML Models #
 ######################
 *.keras
+*.npz
 
 # Result Files #
 ######################
+old
+outputs
 *.html
 alpha_test*.tiff
 err_test*.tiff
@@ -40,6 +48,7 @@ err_test*.tiff
 *_traces.tiff
 *_cps.tiff
 *_hconcat.tiff
+scratch*.py
 
 # OS generated files #
 ######################

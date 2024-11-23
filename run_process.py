@@ -70,6 +70,9 @@ def main(data_path, result_path):
 
 
     print(f'Prediction on the data...')
+    print([PYTHON_VERSION, f'ana_prediction.py',
+                        f'{data_path}', f'{result_path}', f'{image_path}',
+                        f'{False}'])
     proc = run_command([PYTHON_VERSION, f'ana_prediction.py',
                         f'{data_path}', f'{result_path}', f'{image_path}',
                         f'{False}'])

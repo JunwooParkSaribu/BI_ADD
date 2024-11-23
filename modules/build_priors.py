@@ -45,7 +45,7 @@ def make_priors(datapath, savepath, imagepath, make_image):
                  alphas=all_alphas, seg_lengths=all_seg_lengths, all_ks=all_ks)
 
         if make_image:
-            raw_distribution(f'{imagepath}/sample_distribs.png', all_alphas, all_ks, all_seg_lengths)
+            raw_distribution(f'{imagepath}/sample_distribution.png', all_alphas, all_ks, all_seg_lengths)
             print('Sample distribution generated...')
 
 
