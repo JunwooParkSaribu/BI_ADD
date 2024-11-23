@@ -1,4 +1,5 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 import sys
 import subprocess
 import sklearn
@@ -8,7 +9,6 @@ import pandas
 from modules import load_priors
 
 
-PYTHON_VERSION = 'python3'
 PUBLIC_DATA_PATH = f'inputs/'
 RESULT_DIR_PATH = f'outputs/'
 
@@ -29,7 +29,7 @@ def main(data_path, result_path):
         if not os.path.exists(f'./models/reg_k_model.keras'):
             raise Exception(f'reg_k_model.keras doesn\'t exist')
 
-        run_command([PYTHON_VERSION, f'1 + 1'])
+        run_command([sys.executable, f'1 + 1'])
         print(f'numpy version: {numpy.__version__}')
         print(f'pandas version: {pandas.__version__}')
         print(f'sklearn version: {sklearn.__version__}')
@@ -59,27 +59,24 @@ def main(data_path, result_path):
     print('State numbers are loaded')
 
     print(f'Prior building on the data...')
-    proc = run_command([PYTHON_VERSION, f'./modules/build_priors.py',
+    proc = run_command([sys.executable, f'./modules/build_priors.py',
                         f'{data_path}', f'{result_path}', f'{image_path}',
                         f'{False}'])
     proc.wait()
-    if proc.poll() == 0:
-        print(f'-> successfully finished')
-    else:
+    if proc.poll() != 0:
         print(f'-> failed with status:{proc.poll()}, {proc.stderr.read().decode()}')
+    else:
+        print(f'-> prior_buid finished')
 
     registed_state_nb = load_priors.load_state_prior(result_path)
     print(f'Registed state nb of {data_path}: {registed_state_nb}')
     
     print(f'Prediction on the data...')
-    proc = run_command([PYTHON_VERSION, f'ana_prediction.py',
+    proc = run_command([sys.executable, f'ana_prediction.py',
                         f'{data_path}', f'{result_path}', f'{image_path}',
                         f'{False}'])
-    proc.wait()
-    if proc.poll() == 0:
-        print(f'-> successfully finished')
-    else:
-        print(f'-> failed with status:{proc.poll()}, {proc.stderr.read().decode()}')
+    if proc.returncode != 0:
+        print(f'-> failed with status:{proc.returncode}, {proc.stderr.read().decode()}')
 
 
 if __name__ == "__main__":

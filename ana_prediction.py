@@ -1,7 +1,9 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 import sys
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 from skimage.restoration import denoise_tv_chambolle
 from sklearn.mixture import GaussianMixture, BayesianGaussianMixture
 from sklearn.model_selection import GridSearchCV
@@ -508,17 +510,28 @@ def main(public_data_path, path_results, image_path, make_image):
         print(f'Cluster images are generated...')
 
     dfs, file_names = load_datas(public_data_path)
-
+    PBAR = tqdm(total=len(dfs), desc="BI-ADD", unit=f"file", ncols=120)
     reg_model = RegModel(REG_MODEL_NUMS)
     for df, f_name in zip(dfs, file_names):
-        outputs = ''
-        submission_file = path_results + f'{f_name}.txt'
-        if not os.path.exists(submission_file):
+        andi_outputs = ''
+        result_file = path_results + f'{f_name}_biadd.csv'
+        andi_submission_file = path_results + f'{f_name}.txt'
+        
+        if not os.path.exists(result_file):
             traj_idx = np.sort(df.traj_idx.unique())
-
+            df_xs = []
+            df_ys = []
+            df_zs = []
+            df_index = []
+            df_frames = []
+            df_ks = []
+            df_alphas = []
+            df_states = []
             for idx in traj_idx:
+                frames = np.array(df[df.traj_idx == idx])[:, 1]
                 x = np.array(df[df.traj_idx == idx])[:, 2]
                 y = np.array(df[df.traj_idx == idx])[:, 3]
+                z = np.array(df[df.traj_idx == idx])[:, 4]
 
                 cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
                                                                             EXT_WIDTH,
@@ -529,7 +542,7 @@ def main(public_data_path, path_results, image_path, make_image):
 
                 prediction_traj = [idx.astype(int)]
                 for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
-                    prediction_traj.append(f'{np.round(10 ** k, 8):.8f}')
+                    prediction_traj.append(np.round(10 ** k, 8))
                     prediction_traj.append(alpha)
                     prediction_traj.append(state)
                     prediction_traj.append(cp)
@@ -537,16 +550,40 @@ def main(public_data_path, path_results, image_path, make_image):
                 #if idx == 4336:
                 #    cps_visualization(image_path, x, y, cps, alpha=0.8, ext=50)
 
-                outputs += ','.join(map(str, prediction_traj))
-                outputs += '\n'
+                andi_outputs += ','.join(map(str, prediction_traj))
+                andi_outputs += '\n'
 
-            with open(submission_file, 'w') as f:
-                f.write(outputs)
+                prev_cp = 0
+                for k, alpha, state, cp in np.array(prediction_traj[1:]).reshape(-1, 4):
+                    df_ks.extend([round(k, 5)] * int(cp - prev_cp))
+                    df_alphas.extend([round(alpha, 5)] * int(cp - prev_cp))
+                    df_states.extend([state] * int(cp - prev_cp))
+                    prev_cp = cp
+
+                df_xs.extend(list(x))
+                df_ys.extend(list(y))
+                df_zs.extend(list(z))
+                df_frames.extend(list(frames))
+                df_index.extend([idx] * len(x))
+
+            with open(andi_submission_file, 'w') as f:
+                f.write(andi_outputs)
                 f.close()
 
+            result_df = pd.DataFrame({'traj_idx':df_index,
+                                      'frame':df_frames,
+                                      'x':df_xs,
+                                      'y':df_ys,
+                                      'z':df_zs,
+                                      'state':df_states,
+                                      'K':df_ks,
+                                      'alpha':df_alphas})
+            result_df.to_csv(result_file, index=False)
         else:
             print(f'Result already exists: data:{f_name}')
 
+        PBAR.update(1)
+    PBAR.close()
 
 if __name__ == "__main__":
     # data_path, result_path, image_path, True
