@@ -68,7 +68,9 @@ def main(data_path, result_path):
     else:
         print(f'-> failed with status:{proc.poll()}, {proc.stderr.read().decode()}')
 
-
+    registed_state_nb = load_priors.load_state_prior(result_path)
+    print(f'Registed state nb of {data_path}: {registed_state_nb}')
+    
     print(f'Prediction on the data...')
     proc = run_command([PYTHON_VERSION, f'ana_prediction.py',
                         f'{data_path}', f'{result_path}', f'{image_path}',
