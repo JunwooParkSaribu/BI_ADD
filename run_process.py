@@ -69,7 +69,7 @@ def main(data_path, result_path):
         print(f'-> prior_buid finished')
 
     registed_state_nb = load_priors.load_state_prior(result_path)
-    print(f'Registed state nb of {data_path}: {registed_state_nb}')
+    print(f'Registered state nb of {data_path}: {registed_state_nb}')
     
     print(f'Prediction on the data...')
     proc = run_command([sys.executable, f'ana_prediction.py',
