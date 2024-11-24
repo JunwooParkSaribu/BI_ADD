@@ -3,6 +3,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import sys
 import numpy as np
 import pandas as pd
+from datetime import datetime
 from tqdm import tqdm
 from skimage.restoration import denoise_tv_chambolle
 from sklearn.mixture import GaussianMixture, BayesianGaussianMixture
@@ -485,6 +486,7 @@ def cluster_define(samples, state_number):
 
 
 def main(public_data_path, path_results, image_path, make_image):
+    METADATA_ID = np.random.randint(0, 1024 * 1024)
     WIN_WIDTHS = np.arange(20, 40, 2)
     SHIFT_WIDTH = 5
 
@@ -514,7 +516,7 @@ def main(public_data_path, path_results, image_path, make_image):
     reg_model = RegModel(REG_MODEL_NUMS)
     for df, f_name in zip(dfs, file_names):
         andi_outputs = ''
-        result_file = path_results + f'{f_name}_biadd.csv'
+        result_file = path_results + f'{f_name}_biadd.h5'
         andi_submission_file = path_results + f'{f_name}.txt'
         
         if not os.path.exists(result_file):
@@ -578,8 +580,15 @@ def main(public_data_path, path_results, image_path, make_image):
                                       'state':df_states,
                                       'K':df_ks,
                                       'alpha':df_alphas})
-            result_df.to_csv(result_file, index=False)
-        else:
+            result_df.attrs.update({
+                'sample_id':METADATA_ID,
+                'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                })
+            with pd.HDFStore(result_file, 'w') as hdf_store:
+                hdf_store.put('data', result_df, format='table')
+                hdf_store.get_storer('data').attrs.metadata = result_df.attrs
+
+        else:   
             print(f'Result already exists: data:{f_name}')
 
         PBAR.update(1)
