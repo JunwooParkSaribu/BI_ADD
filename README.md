@@ -8,7 +8,7 @@
 > - Python 3.10 or higher
 > - latest version of [scikit-learn](https://scikit-learn.org/stable/)[^3]
 > - latest version of [scikit-image](https://scikit-image.org/docs/stable/user_guide/install.html)[^4]
-> - Pre-trained [models](https://drive.google.com/file/d/1WF0eW8Co23-mKQiHNH-KHHK_lJiIW-WC/view?usp=sharing)
+> - Pre-trained [models](https://github.com/JunwooParkSaribu/BI_ADD/tree/main/models)
 
 
 <b>BI-ADD</b> detects changepoints at single molecular trajectory level which follows fBm with two properties, Anomalous exponent(alpha) and Generalized diffusion coefficient(K), on different scenarios.</br>
