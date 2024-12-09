@@ -533,7 +533,10 @@ def main(public_data_path, path_results, image_path, make_image):
                 frames = np.array(df[df.traj_idx == idx])[:, 1]
                 x = np.array(df[df.traj_idx == idx])[:, 2]
                 y = np.array(df[df.traj_idx == idx])[:, 3]
-                z = np.array(df[df.traj_idx == idx])[:, 4]
+                if 'z' in df:
+                    z = np.array(df[df.traj_idx == idx])[:, 4]
+                else:
+                    z = np.zeros_like(x)
 
                 cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
                                                                             EXT_WIDTH,
