@@ -1,4 +1,4 @@
-cff-version: 0.2.0
+cff-version: 1.0.0
 message: "If you use this software, please cite it as below."
 authors:
   - family-names: Park
@@ -17,8 +17,8 @@ authors:
     given-names: Judith
     orcid: https://orcid.org/0000-0001-9986-4092
 title: "BI-ADD"
-version: v0.2.0-alpha
+version: v1.0.0
 identifiers:
   - type: doi
     value: 10.5281/zenodo.13334951
-date-released: 2024-11-24
+date-released: 2024-12-21
