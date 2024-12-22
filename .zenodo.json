@@ -29,7 +29,9 @@
 
     "license": "GPL-3.0",
 
-    "title": "BI-ADD: Segmentation of particle trajectories following fBm",
+    "title": "BI-ADD",
+    
+    "description": "Segmentation of particle trajectories following fBm",
 
     "keywords": ["fBm", "SPT", "microscopy", "ML", "segmentation"],
 

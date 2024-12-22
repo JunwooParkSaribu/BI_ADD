@@ -16,8 +16,8 @@ authors:
   - family-names: Miné-Hattab
     given-names: Judith
     orcid: https://orcid.org/0000-0001-9986-4092
-title: "BI-ADD: Segmentation of particle trajectories following fBm"
+title: "BI-ADD"
 identifiers:
   - type: doi
     value: 10.5281/zenodo.13334951
-date-released: 2024-12-21
+date-released: 2024-12-22
