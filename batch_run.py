@@ -9,8 +9,8 @@ import pandas
 from modules import load_priors
 
 
-PUBLIC_DATA_PATH = f'inputs/'
-RESULT_DIR_PATH = f'outputs/'
+PUBLIC_DATA_PATHS = [f'exp_0/', f'exp_1/', f'exp_2/', f'exp_3/', f'exp_4/', f'exp_5/', f'exp_6/', f'exp_7/', f'exp_8/', f'exp_9/']
+RESULT_DIR_PATHS = [f'exp_0/', f'exp_1/', f'exp_2/', f'exp_3/', f'exp_4/', f'exp_5/', f'exp_6/', f'exp_7/', f'exp_8/', f'exp_9/']
 
 
 def run_command(cmd):
@@ -80,4 +80,5 @@ def main(data_path, result_path):
 
 
 if __name__ == "__main__":
-    main(PUBLIC_DATA_PATH, RESULT_DIR_PATH)
+    for input_path, output_path in zip(PUBLIC_DATA_PATHS, RESULT_DIR_PATHS):
+        main(input_path, output_path)
