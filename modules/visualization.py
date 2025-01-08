@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
+import seaborn as sns   
 import numpy as np
+import pandas as pd
 import imageio
 import cv2
 
@@ -35,8 +37,24 @@ def sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, clu
     plt.close('all')
 
 
+def cluster_scatter(image_path, all_alphas, all_ks, cluster):
+    boundary_file = f'{image_path}/subtrajectory_scatters.png'
+    plt.figure(figsize=(20, 20), dpi=256)
+    points = np.stack((all_alphas, all_ks)).T.reshape(-1, 2)
+    labels = cluster.predict(points)
+    dataframe = pd.DataFrame({'alpha': all_alphas, 'logK': all_ks, 'label':labels.flatten()})
+    sns.jointplot(data=dataframe, x='alpha', y='logK', hue='label', kind='scatter', xlim=(-0.2, 2.2))
+    plt.xticks(fontsize=20, rotation=90)
+    plt.yticks(fontsize=20)
+    plt.xlabel(r'$\alpha$', fontsize=24)
+    plt.ylabel(r'$logK$', fontsize=24)
+    plt.tight_layout()
+    plt.savefig(boundary_file)
+    plt.close('all')
+
+
 def cluster_boundary(image_path, all_alphas, all_ks, cluster):
-    boundary_file = f'{image_path}/data_mixture_boundary.png'
+    boundary_file = f'{image_path}/cluter_boundary.png'
     alpha_range = np.linspace(-2.2, 4.2, 100)
     logk_range = np.linspace(-4.0, 4.0, 150)
     H, xedges, yedges = np.histogram2d(all_ks, all_alphas, bins=[logk_range, alpha_range])

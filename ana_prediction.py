@@ -10,7 +10,7 @@ from sklearn.mixture import GaussianMixture, BayesianGaussianMixture
 from sklearn.model_selection import GridSearchCV
 from modules import load_priors
 from modules.load_files.load_andi_files import load_datas
-from modules.visualization import cluster_boundary, sample_distribution, cps_visualization
+from modules.visualization import cluster_boundary, sample_distribution, cluster_scatter, cps_visualization
 from modules.load_models import RegModel
 
 
@@ -507,8 +507,9 @@ def main(public_data_path, path_results, image_path, make_image):
 
     cluster, cluster_states = cluster_define(stack_samples, states_nb)
     if make_image:
-        sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states)
+        #sample_distribution(image_path, stack_samples, all_seg_lengths, cluster, cluster_states)
         cluster_boundary(image_path, all_alphas, all_ks, cluster)
+        cluster_scatter(image_path, all_alphas, all_ks, cluster)
         print(f'Cluster images are generated...')
 
     dfs, file_names = load_datas(public_data_path)
