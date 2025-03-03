@@ -24,7 +24,7 @@ def load_datas(datapath):
     file_list = []
     for file in os.listdir(datapath):
         if file.endswith(".csv"):
-            df = pd.read_csv(datapath + file)
+            df = pd.read_csv(f'{datapath}/{file}')
             dfs.append(df)
             file_list.append(file.split('.csv')[0])
     return dfs, file_list

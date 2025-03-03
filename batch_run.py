@@ -9,8 +9,8 @@ import pandas
 from modules import load_priors
 
 
-PUBLIC_DATA_PATHS = [f'test3/pred/track_2/exp_0/', f'test3/pred/track_2/exp_1/', f'test3/pred/track_2/exp_2/', f'test3/pred/track_2/exp_3/', f'test3/pred/track_2/exp_4/', f'test3/pred/track_2/exp_5/', f'test3/pred/track_2/exp_6/']
-RESULT_DIR_PATHS = [f'test3/pred/track_2/exp_0/', f'test3/pred/track_2/exp_1/', f'test3/pred/track_2/exp_2/', f'test3/pred/track_2/exp_3/', f'test3/pred/track_2/exp_4/', f'test3/pred/track_2/exp_5/', f'test3/pred/track_2/exp_6/']
+PUBLIC_DATA_PATHS = [f'my/test0', f'my/test1', f'my/test2', f'my/test3']
+RESULT_DIR_PATHS = [f'my/test0', f'my/test1', f'my/test2', f'my/test3']
 
 
 def run_command(cmd):
@@ -46,7 +46,7 @@ def main(data_path, result_path):
         print('---------------------------------------')
         sys.exit(1)
 
-    image_path = result_path + f'images'
+    image_path = result_path + f'/images'
     if not os.path.exists(result_path):
         os.makedirs(result_path)
     if not os.path.exists(image_path):

@@ -517,8 +517,8 @@ def main(public_data_path, path_results, image_path, make_image):
     reg_model = RegModel(REG_MODEL_NUMS)
     for df, f_name in zip(dfs, file_names):
         andi_outputs = ''
-        result_file = path_results + f'{f_name}_biadd.h5'
-        andi_submission_file = path_results + f'{f_name}.txt'
+        result_file = path_results + f'/{f_name}_biadd.h5'
+        andi_submission_file = path_results + f'/{f_name}.txt'
         
         if not os.path.exists(result_file):
             traj_idx = np.sort(df.traj_idx.unique())

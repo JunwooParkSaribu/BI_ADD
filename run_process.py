@@ -9,8 +9,8 @@ import pandas
 from modules import load_priors
 
 
-PUBLIC_DATA_PATH = f'inputs/'
-RESULT_DIR_PATH = f'outputs/'
+PUBLIC_DATA_PATH = f'inputs'
+RESULT_DIR_PATH = f'outputs'
 
 
 def run_command(cmd):
@@ -46,7 +46,7 @@ def main(data_path, result_path):
         print('---------------------------------------')
         sys.exit(1)
 
-    image_path = result_path + f'images'
+    image_path = result_path + f'/images'
     if not os.path.exists(result_path):
         os.makedirs(result_path)
     if not os.path.exists(image_path):
