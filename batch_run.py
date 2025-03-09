@@ -9,8 +9,8 @@ import pandas
 from modules import load_priors
 
 
-PUBLIC_DATA_PATHS = [f'my/test0', f'my/test1', f'my/test2', f'my/test3']
-RESULT_DIR_PATHS = [f'my/test0', f'my/test1', f'my/test2', f'my/test3']
+PUBLIC_DATA_PATHS = [f'mytest/condition0', f'mytest/condition1', f'mytest/condition2', f'mytest/condition3']
+RESULT_DIR_PATHS = [f'mytest/condition0', f'mytest/condition1', f'mytest/condition2', f'mytest/condition3']
 
 
 def run_command(cmd):
