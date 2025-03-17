@@ -1,5 +1,5 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334951.svg)](https://doi.org/10.5281/zenodo.13334951)
-![Static Badge](https://img.shields.io/badge/BI_ADD-a?style=flat&label=arXiv&color=%23B31B1B&link=https%3A%2F%2Farxiv.org%2Fabs%2F2503.11529)
+[![Static Badge](https://img.shields.io/badge/BI_ADD-a?style=flat&label=arXiv&color=%23B31B1B&link=https%3A%2F%2Farxiv.org%2Fabs%2F2503.11529)](https://arxiv.org/abs/2503.11529)
 ## BI-ADD (Bottom-up Iterative Anomalous Diffusion Detector)
 
 > [!IMPORTANT]  
