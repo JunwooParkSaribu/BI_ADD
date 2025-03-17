@@ -1,11 +1,11 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334951.svg)](https://doi.org/10.5281/zenodo.13334951)
-
+![Static Badge](https://img.shields.io/badge/BI_ADD-a?style=flat&label=arXiv&color=%23B31B1B&link=https%3A%2F%2Farxiv.org%2Fabs%2F2503.11529)
 ## BI-ADD (Bottom-up Iterative Anomalous Diffusion Detector)
 
 > [!IMPORTANT]  
 > Requirements </br>
-> - TensorFlow 2.14.1[^6]
-> - Python 3.10 or higher
+> - TensorFlow 2.14
+> - Python 3.10
 > - latest version of [scikit-learn](https://scikit-learn.org/stable/)[^3]
 > - latest version of [scikit-image](https://scikit-image.org/docs/stable/user_guide/install.html)[^4]
 > - Pre-trained [models](https://github.com/JunwooParkSaribu/BI_ADD/tree/main/models)
