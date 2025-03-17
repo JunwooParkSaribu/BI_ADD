@@ -41,7 +41,7 @@ junwoo.park@sorbonne-universite.fr</br>
 
 > If you use this software, please cite it as below. </br>
 ```
-@misc{park2025bottomupiterativeanomalousdiffusion,
+@misc{bi_add,
       title={Bottom-up Iterative Anomalous Diffusion Detector (BI-ADD)}, 
       author={Junwoo Park and Nataliya Sokolovska and Clément Cabriel and Ignacio Izeddin and Judith Miné-Hattab},
       year={2025},
