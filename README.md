@@ -1,5 +1,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334951.svg)](https://doi.org/10.5281/zenodo.13334951)
 [![Static Badge](https://img.shields.io/badge/BI_ADD-a?style=flat&label=arXiv&color=%23B31B1B&link=https%3A%2F%2Farxiv.org%2Fabs%2F2503.11529)](https://arxiv.org/abs/2503.11529)
+![GitHub License](https://img.shields.io/github/license/JunwooParkSaribu/BI_ADD)
 ## BI-ADD (Bottom-up Iterative Anomalous Diffusion Detector)
 
 > [!IMPORTANT]  
@@ -37,6 +38,7 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 
 <h3> Contacts </h3>
 junwoo.park@sorbonne-universite.fr</br>
+</br>
 
 
 > If you use this software, please cite it as below. </br>
