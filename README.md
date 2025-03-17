@@ -38,6 +38,20 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 <h3> Contacts </h3>
 junwoo.park@sorbonne-universite.fr</br>
 
+
+> If you use this software, please cite it as below. </br>
+```
+@misc{park2025bottomupiterativeanomalousdiffusion,
+      title={Bottom-up Iterative Anomalous Diffusion Detector (BI-ADD)}, 
+      author={Junwoo Park and Nataliya Sokolovska and Clément Cabriel and Ignacio Izeddin and Judith Miné-Hattab},
+      year={2025},
+      eprint={2503.11529},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2503.11529}, 
+}
+```
+
 <h3> References </h3>
 
 [^1]: [AnDi datasets](https://doi.org/10.5281/zenodo.10259556)
