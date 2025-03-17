@@ -25,17 +25,6 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
         </tr>
 </table>
 
-<table border="0"> 
-        <tr> 
-            <td>On real trajectories</td>
-        </tr>
-        <tr> 
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real2.gif" width="120" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real3.gif" width="120" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real4.gif" width="120" height="340"></td>
-            <td><img src="https://github.com/JunwooParkSaribu/BI_ADD/blob/main/tmps/imgs/real5.gif" width="120" height="340"></td>
-        </tr>  
-</table>
 <img src="https://github.com/JunwooParkSaribu/AnDi2_SU_FIONA/blob/main/tmps/imgs/foot.png" width="232" height="64"></br>
 
 
@@ -48,3 +37,10 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 
 <h3> Contacts </h3>
 junwoo.park@sorbonne-universite.fr</br>
+
+<h3> References </h3>
+
+[^1]: [AnDi datasets](https://doi.org/10.5281/zenodo.10259556)
+[^2]: Quantitative evaluation of methods to analyze motion changes in single-particle experiments, Gorka Muñoz-Gil et al. 2024 [https://arxiv.org/abs/2311.18100](https://arxiv.org/abs/2311.18100)
+[^3]: Convolutional LSTM Network, A Machine Learning Approach for Precipitation Nowcasting, Xingjian Shi et al. 2015 [https://arxiv.org/abs/1506.04214](https://arxiv.org/abs/1506.04214)
+[^4]: Chenouard, N., Smal, I., de Chaumont, F. et al. [Objective comparison of particle tracking methods](https://doi.org/10.1038/nmeth.2808). Nat Methods 11, 281–289 (2014).
