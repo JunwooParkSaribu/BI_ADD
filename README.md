@@ -32,7 +32,7 @@ The trajectory prediction from video is performed with <b>[FreeTrace](https://gi
 <h3> To run the program on your device </h3>
 
 1. Clone the repository on your local device.</br>
-2. Download pre-trained [*models*](https://drive.google.com/file/d/1WF0eW8Co23-mKQiHNH-KHHK_lJiIW-WC/view?usp=sharing), place the *models* folder inside of *BI_ADD* folder.</br>
+2. Download pre-trained [*models*](https://github.com/JunwooParkSaribu/BI_ADD/tree/main/models), place the *models* folder inside of *BI_ADD* folder.</br>
 3. Place trajectory csv files(traj_idx, frame, x, y) inside *inputs* folder.</br>
 4. Run *run.py* via python.</br>
 
