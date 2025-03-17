@@ -8,6 +8,7 @@ class RegModel:
         self.alpha_models = None
         self.k_model = None
         self.load_models(self.reg_model_nums)
+        self.fixed_lengths = [8, 12, 18, 36, 72, 140]
 
     def load_models(self, model_nums):
         self.alpha_models = {n: load_model(f'./models/reg_model_{n}.keras') for n in model_nums}
@@ -59,21 +60,14 @@ class RegModel:
         return k_preds.flatten()
 
     def model_selection(self, length):
-        if length < 8:
-            reg_model_num = self.reg_model_nums[0]
-        elif length < 12:
-            reg_model_num = self.reg_model_nums[1]
-        elif length < 18:
-            reg_model_num = self.reg_model_nums[2]
-        elif length < 36:
-            reg_model_num = self.reg_model_nums[3]
-        elif length < 72:
-            reg_model_num = self.reg_model_nums[4]
-        elif length < 140:
-            reg_model_num = self.reg_model_nums[5]
-        else:
-            reg_model_num = self.reg_model_nums[6]
-        return reg_model_num
+        index = 0
+        while True:
+            if length < self.fixed_lengths[index]:
+                if index < len(self.reg_model_nums):
+                    return self.reg_model_nums[index]
+                else:
+                    return self.reg_model_nums[-1]
+            index += 1
 
     def log_displacements(self, xs, ys):
         disps = self.displacement(xs, ys)
