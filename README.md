@@ -5,10 +5,10 @@
 
 > [!IMPORTANT]  
 > Requirements </br>
-> - TensorFlow 2.14
-> - Python 3.10
-> - latest version of [scikit-learn](https://scikit-learn.org/stable/)[^3]
-> - latest version of [scikit-image](https://scikit-image.org/docs/stable/user_guide/install.html)[^4]
+> - TensorFlow 2.14 or 2.17
+> - Python 3.10 or 3.12
+> - latest version of [scikit-learn](https://scikit-learn.org/stable/)
+> - latest version of [scikit-image](https://scikit-image.org/docs/stable/user_guide/install.html)
 > - Pre-trained [models](https://github.com/JunwooParkSaribu/BI_ADD/tree/main/models)
 
 
