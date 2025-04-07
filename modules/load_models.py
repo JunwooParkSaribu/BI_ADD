@@ -62,11 +62,12 @@ class RegModel:
     def model_selection(self, length):
         index = 0
         while True:
+            if length >= self.get_reg_model_nums()[-1]:
+                return self.get_reg_model_nums()[-1]
             if length < self.fixed_lengths[index]:
-                if index < len(self.reg_model_nums):
-                    return self.reg_model_nums[index]
-                else:
-                    return self.reg_model_nums[-1]
+                return self.reg_model_nums[index]
+            if index >= len(self.fixed_lengths):
+                return self.get_reg_model_nums()[-1]
             index += 1
 
     def log_displacements(self, xs, ys):
