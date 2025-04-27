@@ -16,7 +16,7 @@ from modules.load_models import RegModel
 
 REG_MODEL_NUMS = [5, 8, 12, 16, 32, 64, 128]
 DEL_CONDITIONS = [1e-5, 0.001, 0.025, 0.10]
-SEARCH_SEUIL = 0.15
+SEARCH_SEUIL = 0.25
 MAX_DENSITY_NB = 25
 EXT_WIDTH = 100
 CLUSTER_RANGE = np.arange(1, 4)
