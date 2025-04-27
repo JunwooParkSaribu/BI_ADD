@@ -521,77 +521,79 @@ def main(public_data_path, path_results, image_path, make_image):
         andi_submission_file = path_results + f'/{f_name}.txt'
         
         if not os.path.exists(result_file):
-            traj_idx = np.sort(df.traj_idx.unique())
-            df_xs = []
-            df_ys = []
-            df_zs = []
-            df_index = []
-            df_frames = []
-            df_ks = []
-            df_alphas = []
-            df_states = []
-            for idx in traj_idx:
-                frames = np.array(df[df.traj_idx == idx])[:, 1]
-                x = np.array(df[df.traj_idx == idx])[:, 2]
-                y = np.array(df[df.traj_idx == idx])[:, 3]
-                if 'z' in df:
-                    z = np.array(df[df.traj_idx == idx])[:, 4]
-                else:
-                    z = np.zeros_like(x)
+            try:
+                traj_idx = np.sort(df.traj_idx.unique())
+                df_xs = []
+                df_ys = []
+                df_zs = []
+                df_index = []
+                df_frames = []
+                df_ks = []
+                df_alphas = []
+                df_states = []
+                for idx in traj_idx:
+                    frames = np.array(df[df.traj_idx == idx])[:, 1]
+                    x = np.array(df[df.traj_idx == idx])[:, 2]
+                    y = np.array(df[df.traj_idx == idx])[:, 3]
+                    if 'z' in df:
+                        z = np.array(df[df.traj_idx == idx])[:, 4]
+                    else:
+                        z = np.zeros_like(x)
 
-                cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
-                                                                            EXT_WIDTH,
-                                                                            search_seuil=SEARCH_SEUIL,
-                                                                            cluster=cluster,
-                                                                            cluster_states=cluster_states,
-                                                                            reg_model=reg_model)
+                    cps, alphas, ks, states, seg_lengths = exhaustive_cps_search(x, y, WIN_WIDTHS, SHIFT_WIDTH,
+                                                                                EXT_WIDTH,
+                                                                                search_seuil=SEARCH_SEUIL,
+                                                                                cluster=cluster,
+                                                                                cluster_states=cluster_states,
+                                                                                reg_model=reg_model)
 
-                prediction_traj = [idx.astype(int)]
-                for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
-                    prediction_traj.append(np.round(10 ** k, 8))
-                    prediction_traj.append(alpha)
-                    prediction_traj.append(state)
-                    prediction_traj.append(cp)
+                    prediction_traj = [idx.astype(int)]
+                    for k, alpha, state, cp in zip(ks, np.round(alphas, 5), states, cps[1:]):
+                        prediction_traj.append(np.round(10 ** k, 8))
+                        prediction_traj.append(alpha)
+                        prediction_traj.append(state)
+                        prediction_traj.append(cp)
 
-                #if idx == 4336:
-                #    cps_visualization(image_path, x, y, cps, alpha=0.8, ext=50)
+                    #if idx == 4336:
+                    #    cps_visualization(image_path, x, y, cps, alpha=0.8, ext=50)
 
-                andi_outputs += ','.join(map(str, prediction_traj))
-                andi_outputs += '\n'
+                    andi_outputs += ','.join(map(str, prediction_traj))
+                    andi_outputs += '\n'
 
-                prev_cp = 0
-                for k, alpha, state, cp in np.array(prediction_traj[1:]).reshape(-1, 4):
-                    df_ks.extend([round(k, 5)] * int(cp - prev_cp))
-                    df_alphas.extend([round(alpha, 5)] * int(cp - prev_cp))
-                    df_states.extend([state] * int(cp - prev_cp))
-                    prev_cp = cp
+                    prev_cp = 0
+                    for k, alpha, state, cp in np.array(prediction_traj[1:]).reshape(-1, 4):
+                        df_ks.extend([round(k, 5)] * int(cp - prev_cp))
+                        df_alphas.extend([round(alpha, 5)] * int(cp - prev_cp))
+                        df_states.extend([state] * int(cp - prev_cp))
+                        prev_cp = cp
 
-                df_xs.extend(list(x))
-                df_ys.extend(list(y))
-                df_zs.extend(list(z))
-                df_frames.extend(list(frames))
-                df_index.extend([idx] * len(x))
+                    df_xs.extend(list(x))
+                    df_ys.extend(list(y))
+                    df_zs.extend(list(z))
+                    df_frames.extend(list(frames))
+                    df_index.extend([idx] * len(x))
 
-            with open(andi_submission_file, 'w') as f:
-                f.write(andi_outputs)
-                f.close()
+                with open(andi_submission_file, 'w') as f:
+                    f.write(andi_outputs)
+                    f.close()
 
-            result_df = pd.DataFrame({'traj_idx':df_index,
-                                      'frame':df_frames,
-                                      'x':df_xs,
-                                      'y':df_ys,
-                                      'z':df_zs,
-                                      'state':df_states,
-                                      'K':df_ks,
-                                      'alpha':df_alphas})
-            result_df.attrs.update({
-                'sample_id':METADATA_ID,
-                'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                })
-            with pd.HDFStore(result_file, 'w') as hdf_store:
-                hdf_store.put('data', result_df, format='table')
-                hdf_store.get_storer('data').attrs.metadata = result_df.attrs
-
+                result_df = pd.DataFrame({'traj_idx':df_index,
+                                        'frame':df_frames,
+                                        'x':df_xs,
+                                        'y':df_ys,
+                                        'z':df_zs,
+                                        'state':df_states,
+                                        'K':df_ks,
+                                        'alpha':df_alphas})
+                result_df.attrs.update({
+                    'sample_id':METADATA_ID,
+                    'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    })
+                with pd.HDFStore(result_file, 'w') as hdf_store:
+                    hdf_store.put('data', result_df, format='table')
+                    hdf_store.get_storer('data').attrs.metadata = result_df.attrs
+            except Exception as e:
+                print(f'ERR: {e}, possibly no trajectory longer than 5 in the file: {f_name}')
         else:   
             print(f'Result already exists: data:{f_name}')
 
