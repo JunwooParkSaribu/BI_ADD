@@ -1,5 +1,5 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13334951.svg)](https://doi.org/10.5281/zenodo.13334951)
-[![Static Badge](https://img.shields.io/badge/BI_ADD-a?style=flat&label=arXiv&color=%23B31B1B&link=https%3A%2F%2Farxiv.org%2Fabs%2F2503.11529)](https://arxiv.org/abs/2503.11529)
+[![Static Badge](https://img.shields.io/badge/BI_ADD-a?style=flat&label=arXiv&color=%23B31B1B&link=https%3A%2F%2Farxiv.org%2Fabs%2F2503.11529)](https://iopscience.iop.org/article/10.1088/2515-7647/adfc19)
 ![GitHub License](https://img.shields.io/github/license/JunwooParkSaribu/BI_ADD)
 ## BI-ADD (Bottom-up Iterative Anomalous Diffusion Detector)
 
@@ -43,14 +43,18 @@ junwoo.park@sorbonne-universite.fr</br>
 
 > If you use this software, please cite it as below. </br>
 ```
-@misc{bi_add,
-      title={Bottom-up Iterative Anomalous Diffusion Detector (BI-ADD)}, 
-      author={Junwoo Park and Nataliya Sokolovska and Clément Cabriel and Ignacio Izeddin and Judith Miné-Hattab},
-      year={2025},
-      eprint={2503.11529},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2503.11529}, 
+@article{Park_2025,
+    doi = {10.1088/2515-7647/adfc19},
+    url = {https://doi.org/10.1088/2515-7647/adfc19},
+    year = {2025},
+    month = {sep},
+    publisher = {IOP Publishing},
+    volume = {7},
+    number = {4},
+    pages = {045027},
+    author = {Park, Junwoo and Sokolovska, Nataliya and Cabriel, Clément and Izeddin, Ignacio and Miné-Hattab, Judith},
+    title = {Bottom-up iterative anomalous diffusion detector (BI-ADD)},
+    journal = {Journal of Physics: Photonics}
 }
 ```
 
